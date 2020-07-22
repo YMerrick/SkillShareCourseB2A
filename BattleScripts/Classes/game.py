@@ -19,11 +19,59 @@ class Person:
         self.mp = mp
         self.atkH = atk + 10
         self.atkL = atk - 10
-        self.def = df
+        self.df = df
         self.magic = magic
         self.action = ["Attack","Magic"]
 
     def genDmg(self):
         return random.randrange(self.atkL,self.atkH)
 
-    def
+    def genSpellDmg(self, i):
+        mgL = self.magic[i]["dmg"]-5
+        mgH = self.magic[i]["dmg"]+5
+        return random.randrange(mgL, mgH)
+
+    def takeDmg(self, dmg):
+        self.hp -= dmg
+        if self.hp < 0:
+            self.hp = 0
+        return self.hp
+
+    def getHp(self):
+        return self.hp
+
+    def getMaxhp(self):
+        return self.maxHp
+
+    def getMp(self):
+        return self.mp
+
+    def getMaxmp(self):
+        return self.maxMp
+
+    def reduceMp(self, cost):
+        if self.mp > cost:
+            self.mp -= cost
+            return True
+        else:
+            return False
+
+    def getSpellName(self, i):
+        return self.magic[i]["name"]
+
+    def getSpellCost(self, i):
+        return self.magic[i]["cost"]
+
+    def chooseAction(self):
+        i = 1
+        print ("Actions")
+        for item in self.action:
+            print (str(i) + ':', item)
+            i += 1
+
+    def chooseMagic(self):
+        i = 1
+        print ("Magic")
+        for spell in self.magic:
+            print(str(i) + ':', spell["name"], "cost:", str(spell["cost"]) + ")")
+            i += 1
