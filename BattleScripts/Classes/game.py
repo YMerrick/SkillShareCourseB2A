@@ -1,6 +1,6 @@
 import random
 
-class bcolors:
+class bcolours:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
     OKGREEN = '\033[92m'
@@ -26,4 +26,4 @@ class Person:
     def genDmg(self):
         return random.randrange(self.atkL,self.atkH)
 
-    def 
+    def
