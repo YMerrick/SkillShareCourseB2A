@@ -1,27 +1,9 @@
 import random
+from Classes.enemy import Enemy
 
+enemy1 = Enemy(200, 60)
+print(enemy1.getHp())
 
-class Enemy():
-    hp = 200
-
-    def __init__(self, atkL, atkH):
-        self.atkL = atkL
-        self.atkH = atkH
-
-    def getAtk(self):
-        atkPow = random.randrange(self.atkL,self.atkH)
-        print(atkPow)
-
-    def getHp(self):
-        print('Hp is ', self.hp)
-
-enemy1 = Enemy(40, 49)
-enemy1.getAtk()
-enemy1.getHp()
-
-enemy2 = Enemy(75, 90)
-enemy2.getAtk()
-enemy2.getHp()
 
 
 '''
