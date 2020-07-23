@@ -73,6 +73,7 @@ class Person:
 
     def chooseAction(self):
         i = 1
+        print('\n'+bcolours.BOLD+self.name+bcolours.ENDC)
         print ("Actions")
         for item in self.action:
             print (str(i) + ':', item)
@@ -93,7 +94,7 @@ class Person:
             i+=1
 
     def getStats(self):
-        print('                           _______________               _______________ ')
+        print('                               ____________________               ____________________ ')
         print(bcolours.BOLD+self.name+'          '+
-              self.hp+'/'+self.maxHp+'    |'+bcolours.OKGREEN+'█████          '+bcolours.ENDC+'|    '+bcolours.BOLD+
-              +self.mp+'/'+self.maxMp+'    |'+bcolours.OKBLUE+'█████          '+bcolours.ENDC+'|')
+              str(self.hp)+'/'+str(self.maxHp)+'    |'+bcolours.OKGREEN+'█████               '+bcolours.ENDC+'|    '+bcolours.BOLD+
+              str(self.mp)+'/'+str(self.maxMp)+'    |'+bcolours.OKBLUE+'█████               '+bcolours.ENDC+'|')
