@@ -94,7 +94,23 @@ class Person:
             i+=1
 
     def getStats(self):
+        hpBar = ''
+        mpBar = ''
+        barTick = (self.hp/self.maxHp)*100/5
+
+        while barTick >0:
+            hpBar+='█'
+            barTick-=1
+        while len(hpBar)<20:
+            hpBar+=' '
+        barTick = (self.mp/self.maxMp)*100/5
+        while barTick >0:
+            mpBar+='█'
+            barTick-=1
+        while len(mpBar)<20:
+            mpBar+=' '
+
         print('                               ____________________               ____________________ ')
         print(bcolours.BOLD+self.name+'          '+
-              str(self.hp)+'/'+str(self.maxHp)+'    |'+bcolours.OKGREEN+'█████               '+bcolours.ENDC+'|    '+bcolours.BOLD+
-              str(self.mp)+'/'+str(self.maxMp)+'    |'+bcolours.OKBLUE+'█████               '+bcolours.ENDC+'|')
+              str(self.hp)+'/'+str(self.maxHp)+'    |'+bcolours.OKGREEN+hpBar+bcolours.ENDC+'|    '+bcolours.BOLD+
+              str(self.mp)+'/'+str(self.maxMp)+'    |'+bcolours.OKBLUE+mpBar+bcolours.ENDC+'|')
