@@ -112,7 +112,7 @@ class Person:
                 decre -= 1
         currentHp += hpString
 
-        print('                           __________________________________________________ ')
+        print('                               __________________________________________________ ')
         print(bcolours.BOLD+self.name+'          '+
               currentHp+'    |'+bcolours.FAIL+hpBar+bcolours.ENDC+'|')
 

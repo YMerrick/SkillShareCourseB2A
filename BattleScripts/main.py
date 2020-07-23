@@ -1,6 +1,7 @@
 from Classes.game import Person, bcolours
 from Classes.magic import Spell
 from Classes.inventory import Item
+import random
 
 
 
@@ -31,11 +32,14 @@ playerSpells = [fire, thunder, blizzard, meteor, cure, cura]
 playerItem = [{"item": grenade, "quantity": 2},{"item":superpotion,"quantity":2},
               {"item": potion, "quantity": 15},{"item": elixir,"quantity": 1}]
 
-player1 = Person(400, 65, 60, 34, playerSpells, playerItem,"Steve    ")
-player2 = Person(400, 65, 60, 34, playerSpells, playerItem,"Herobrine")
-player3 = Person(400, 65, 60, 34, playerSpells, playerItem,"Mercy    ")
+player1 = Person(500, 65, 60, 34, playerSpells, playerItem,"Steve    ")
+player2 = Person(500, 65, 60, 34, playerSpells, playerItem,"Herobrine")
+player3 = Person(500, 65, 60, 34, playerSpells, playerItem,"Mercy    ")
 players = [player1,player2,player3]
-enemy = Person(1200, 65, 45, 25, [], [],"Bob")
+enemy1 = Person(5000, 90, 90, 25, [], [], "Bob    ")
+enemy2 = Person(1250, 70, 45, 25, [], [], "Charles")
+enemy3 = Person(1250, 70, 45, 25, [], [], "Bundy  ")
+enemies = [enemy1   ,enemy2,enemy3]
 
 running = True
 i = 0
@@ -51,7 +55,9 @@ while running:
         player.getStats()
     print('\n')
 
-    enemy.getEnemyStats()
+    for enemy in enemies:
+        enemy.getEnemyStats()
+    print('\n\n')
 
     for player in players:
 
@@ -119,15 +125,11 @@ while running:
 
 
     enemyChoice = 1
+    target = random.randrange(0,3)
 
     enemyDmg = enemy.genDmg()
-    player1.takeDmg(enemyDmg)
+    players[target].takeDmg(enemyDmg)
     print(bcolours.FAIL +'Enemy attacks for', str(enemyDmg) + bcolours.ENDC)
-
-    print('=============================')
-    print('Enemy HP:', bcolours.FAIL + str(enemy.getHp()) + "/" + str(enemy.getMaxhp()) + bcolours.ENDC)
-    print('Player HP:', bcolours.OKGREEN + str(player.getHp()) + "/" + str(player.getMaxhp()) + bcolours.ENDC)
-    print('Player MP:', bcolours.OKBLUE + str(player.getMp()) + "/" + str(player.getMaxmp()) + bcolours.ENDC)
 
     if enemy.getHp() == 0:
         print(bcolours.OKGREEN + 'You win!' + bcolours.ENDC)
