@@ -93,6 +93,30 @@ class Person:
             print("\n"+str(i)+":", item["item"].name, ":", item["item"].description, "(x"+str(item["quantity"])+")")
             i+=1
 
+    def getEnemyStats(self):
+        hpBar = ''
+        barTick = (self.hp/self.maxHp)*100/2
+
+        while barTick >0:
+            hpBar+='█'
+            barTick-=1
+        while len(hpBar)<50:
+            hpBar+=' '
+
+        hpString = str(self.hp)+'/'+str(self.maxHp)
+        currentHp = ''
+        if len(hpString) < 9:
+            decre = 9 - len(hpString)
+            while decre > 0:
+                currentHp += ' '
+                decre -= 1
+        currentHp += hpString
+
+        print('                           __________________________________________________ ')
+        print(bcolours.BOLD+self.name+'          '+
+              currentHp+'    |'+bcolours.FAIL+hpBar+bcolours.ENDC+'|')
+
+
     def getStats(self):
         hpBar = ''
         mpBar = ''
@@ -110,7 +134,24 @@ class Person:
         while len(mpBar)<20:
             mpBar+=' '
 
+        hpString = str(self.hp)+'/'+str(self.maxHp)
+        currentHp = ''
+        if len(hpString) < 7:
+            decre = 7 - len(hpString)
+            while decre > 0:
+                currentHp += ' '
+                decre -= 1
+        currentHp += hpString
+        mpString = str(self.mp)+'/'+str(self.maxMp)
+        currentMp = ''
+        if len(mpString) < 5:
+            decre = 5 - len(mpString)
+            while decre > 0:
+                currentMp += ' '
+                decre -= 1
+        currentMp += mpString
+
         print('                               ____________________               ____________________ ')
         print(bcolours.BOLD+self.name+'          '+
-              str(self.hp)+'/'+str(self.maxHp)+'    |'+bcolours.OKGREEN+hpBar+bcolours.ENDC+'|    '+bcolours.BOLD+
-              str(self.mp)+'/'+str(self.maxMp)+'    |'+bcolours.OKBLUE+mpBar+bcolours.ENDC+'|')
+              currentHp+'    |'+bcolours.OKGREEN+hpBar+bcolours.ENDC+'|    '+bcolours.BOLD+
+              currentMp+'    |'+bcolours.OKBLUE+mpBar+bcolours.ENDC+'|')

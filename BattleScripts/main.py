@@ -46,10 +46,12 @@ while running:
     print('=============================')
 
     print('\n\n')
-    print('Name                           HP                            MP')
+    print('Name                           HP                                 MP')
     for player in players:
         player.getStats()
     print('\n')
+
+    enemy.getEnemyStats()
 
     for player in players:
 
