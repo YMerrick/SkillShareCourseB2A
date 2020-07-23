@@ -1,5 +1,6 @@
 import random
 
+
 class bcolours:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -26,10 +27,10 @@ class Person:
     def genDmg(self):
         return random.randrange(self.atkL,self.atkH)
 
-    def genSpellDmg(self, i):
+    '''def genSpellDmg(self, i):
         mgL = self.magic[i]["dmg"]-5
         mgH = self.magic[i]["dmg"]+5
-        return random.randrange(mgL, mgH)
+        return random.randrange(mgL, mgH)'''
 
     def takeDmg(self, dmg):
         self.hp -= dmg
@@ -56,11 +57,11 @@ class Person:
         else:
             return False
 
-    def getSpellName(self, i):
+    '''def getSpellName(self, i):
         return self.magic[i]["name"]
 
     def getSpellCost(self, i):
-        return self.magic[i]["cost"]
+        return self.magic[i]["cost"]'''
 
     def chooseAction(self):
         i = 1
@@ -73,5 +74,5 @@ class Person:
         i = 1
         print ("Magic")
         for spell in self.magic:
-            print(str(i) + ':', spell["name"], "cost:", str(spell["cost"]) + ")")
+            print(str(i) + ':', spell.name, "(cost:", str(spell.cost) + ")")
             i += 1
