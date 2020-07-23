@@ -13,7 +13,7 @@ class bcolours:
 
 class Person:
 
-    def __init__(self, hp, mp, atk, df, magic, items):
+    def __init__(self, hp, mp, atk, df, magic, items, name):
         self.maxHp = hp
         self.hp = hp
         self.maxMp = mp
@@ -24,6 +24,7 @@ class Person:
         self.magic = magic
         self.items = items
         self.action = ["Attack","Magic","Items"]
+        self.name = name
 
     def genDmg(self):
         return random.randrange(self.atkL,self.atkH)
@@ -90,3 +91,9 @@ class Person:
         for item in self.items:
             print("\n"+str(i)+":", item["item"].name, ":", item["item"].description, "(x"+str(item["quantity"])+")")
             i+=1
+
+    def getStats(self):
+        print('                           _______________               _______________ ')
+        print(bcolours.BOLD+self.name+'          '+
+              self.hp+'/'+self.maxHp+'    |'+bcolours.OKGREEN+'█████          '+bcolours.ENDC+'|    '+bcolours.BOLD+
+              +self.mp+'/'+self.maxMp+'    |'+bcolours.OKBLUE+'█████          '+bcolours.ENDC+'|')
