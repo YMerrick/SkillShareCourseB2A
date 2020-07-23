@@ -50,6 +50,12 @@ class Person:
     def getMaxmp(self):
         return self.maxMp
 
+    def heal(self,dmg):
+        self.hp += dmg
+        if self.hp > self.maxHp:
+            self.hp = self.maxHp
+        return self.hp
+
     def reduceMp(self, cost):
         if self.mp > cost:
             self.mp -= cost
