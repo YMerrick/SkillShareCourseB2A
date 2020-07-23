@@ -68,8 +68,9 @@ while running:
 
         if index == 0:
             dmg = player.genDmg()
-            enemy.takeDmg(dmg)
-            print ('You attacked for ',dmg, 'points of damage.')
+            enemy = player.chooseTarget(enemies)
+            enemies[enemy].takeDmg(dmg)
+            print ('You attacked', enemies[enemy].name, 'for',dmg, 'points of damage.')
 
 
         elif index == 1:
@@ -87,8 +88,9 @@ while running:
                     player.heal(magicDmg)
                     print(bcolours.OKBLUE + "\n" + spell.name+" heals for", magicDmg, "HP"+bcolours.ENDC)
                 elif spell.type == "Black":
-                    enemy.takeDmg(magicDmg)
-                    print(bcolours.OKBLUE + "\n" + spell.name, "deals", str(magicDmg), "points of damage" + bcolours.ENDC)
+                    enemy = player.chooseTarget(enemies)
+                    enemies[enemy].takeDmg(magicDmg)
+                    print(bcolours.OKBLUE + "\n" + spell.name, "deals", str(magicDmg), "points of damage to "+enemies[enemy].name + bcolours.ENDC)
             else:
                 print(bcolours.FAIL + "\nNot enough MP\n" + bcolours.ENDC)
                 continue
@@ -119,19 +121,20 @@ while running:
                 player.mp = player.maxMp
                 print(bcolours.OKGREEN+"\n"+item.name, "fully restores HP/MP"+bcolours.ENDC)
             elif item.type == "attack":
-                enemy.takeDmg(item.prop)
-                print(bcolours.FAIL + "\n"+item.name, "deals", str(item.prop), "points of damage"+bcolours.ENDC)
+                enemy = player.chooseTarget(enemies)
+                enemies[enemy].takeDmg(item.prop)
+                print(bcolours.FAIL + "\n"+item.name, "deals", str(item.prop), "points of damage to "+enemies[enemy].name+bcolours.ENDC)
 
 
 
     enemyChoice = 1
     target = random.randrange(0,3)
 
-    enemyDmg = enemy.genDmg()
+    enemyDmg = enemies[enemy].genDmg()
     players[target].takeDmg(enemyDmg)
     print(bcolours.FAIL +'Enemy attacks for', str(enemyDmg) + bcolours.ENDC)
 
-    if enemy.getHp() == 0:
+    if enemies[0].getHp() == 0:
         print(bcolours.OKGREEN + 'You win!' + bcolours.ENDC)
         running = False
     elif player.getHp() == 0:
