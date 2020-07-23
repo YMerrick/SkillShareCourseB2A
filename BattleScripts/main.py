@@ -51,8 +51,12 @@ while running:
 
 
         if player.reduceMp(spell.cost):
-            enemy.takeDmg(magicDmg)
-            print(bcolours.OKBLUE + "\n" + spell.name, "deals", str(magicDmg), "points of damage" + bcolours.ENDC)
+            if spell.type == "White":
+                player.heal(magicDmg)
+                print(bcolours.OKBLUE + "\n" + spell.name+" heals for", magicDmg, "HP"+bcolours.ENDC)
+            elif spell.type == "Black":
+                enemy.takeDmg(magicDmg)
+                print(bcolours.OKBLUE + "\n" + spell.name, "deals", str(magicDmg), "points of damage" + bcolours.ENDC)
         else:
             print(bcolours.FAIL + "\nNot enough MP\n" + bcolours.ENDC)
             continue
@@ -63,7 +67,7 @@ while running:
 
     enemyDmg = enemy.genDmg()
     player.takeDmg(enemyDmg)
-    print('Enemy attacks for', enemyDmg)
+    print(bcolours.FAIL +'Enemy attacks for', str(enemyDmg) + bcolours.ENDC)
 
     print('=============================')
     print('Enemy HP:', bcolours.FAIL + str(enemy.getHp()) + "/" + str(enemy.getMaxhp()) + bcolours.ENDC)
