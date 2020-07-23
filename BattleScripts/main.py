@@ -3,6 +3,20 @@ from Classes.magic import Spell
 from Classes.inventory import Item
 
 
+print('Name                       HP                          MP')
+print('                           _______________               _______________ ')
+print(bcolours.BOLD+'Steve          '+
+      '400/400    |'+bcolours.OKGREEN+'█████          '+bcolours.ENDC+'|    '+bcolours.BOLD+
+      '65/65    |'+bcolours.OKBLUE+'█████          '+bcolours.ENDC+'|')
+
+print('                           _______________               _______________ ')
+print('Steve          400/400    |█████          |    65/65    |█████          |')
+
+print('                           _______________               _______________ ')
+print('Steve          400/400    |█████          |    65/65    |█████          |')
+
+
+
 #Creat black magic
 fire = Spell("Fire", 10, 100, "Black")
 thunder = Spell("Thunder", 10, 100, "Black")
@@ -27,8 +41,11 @@ playerSpells = [fire, thunder, blizzard, meteor, cure, cura]
 playerItem = [{"item": grenade, "quantity": 2},{"item":superpotion,"quantity":2},
               {"item": potion, "quantity": 15},{"item": elixir,"quantity": 1}]
 
-player = Person(400, 65, 60, 34, playerSpells, playerItem)
-enemy = Person(1200, 65, 45, 25, [], [])
+player1 = Person(400, 65, 60, 34, playerSpells, playerItem,"Steve    ")
+player2 = Person(400, 65, 60, 34, playerSpells, playerItem,"Herobrine")
+player3 = Person(400, 65, 60, 34, playerSpells, playerItem,"Mercy    ")
+players = [player1,player2,player3]
+enemy = Person(1200, 65, 45, 25, [], [],"Bob")
 
 running = True
 i = 0
@@ -81,7 +98,7 @@ while running:
         if player.items[itemChoice]["quantity"] == 0:
             print (bcolours.FAIL+"\nNone left..."+bcolours.ENDC)
             continue
-            
+
         player.items[itemChoice]["quantity"] -= 1
 
 
