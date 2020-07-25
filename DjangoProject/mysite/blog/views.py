@@ -8,5 +8,5 @@ def index(request):
     return render(request, 'index.html',{'posts':posts})
 
 def post(request, slug):
-    print(slug)
+    #sprint(slug)
     return render(None,'post.html',{"post":get_object_or_404(Post, slug = slug)})
