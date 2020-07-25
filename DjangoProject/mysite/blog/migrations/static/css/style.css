@@ -1,7 +1,14 @@
 body {
-  background-color: #F69 !important;
+  background-color: #F99 !important;
 }
 
+h1 {
+  color:purple;
+}
+
+h3 {
+  color: black !important;
+}
 div {
-  color: blue;
+  color: black !important;
 }

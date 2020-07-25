@@ -1,4 +1,9 @@
-<a href="/">Back to index</a><br><br>
+{% extends 'base.html' %}
 
-<h2>Static Page</h2><br><br>
-<p>Nothing really going on here</p>
+{%block title%}: {{post.title}}{%endblock%}
+{% block content %}
+
+  <h2>Static Page</h2><br><br>
+  <p>Nothing really going on here</p>
+
+{%endblock%}
