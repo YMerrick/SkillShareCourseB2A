@@ -10,3 +10,6 @@ def index(request):
 def post(request, slug):
     #sprint(slug)
     return render(None,'post.html',{"post":get_object_or_404(Post, slug = slug)})
+
+def about(request):
+    return render(None,'about.html',{})
