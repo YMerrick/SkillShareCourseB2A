@@ -6,6 +6,9 @@ h1 {
   color:purple;
 }
 
+#post {
+  background-color: white;
+}
 h3 {
   color: black !important;
 }

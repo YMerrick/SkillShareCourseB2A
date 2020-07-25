@@ -2,10 +2,15 @@
 
 {%block title%}: {{post.title}}{%endblock%}
 {% block content %}
+  <br>
+  <div class="container" id = "post">
+    <h2>{{ post.title }}</h2>
 
-  <h2>{{ post.title }}</h2>
-
-  <div>
-    {{post.content}}
+    <div>
+      {{post.content}}
+    </div>
   </div>
+  <br>
+  
+
 {%endblock%}
