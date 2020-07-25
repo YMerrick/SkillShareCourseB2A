@@ -1,5 +1,4 @@
 """mysite URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
 Examples:
@@ -20,5 +19,5 @@ from blog import views as blogViews
 urlpatterns = [
     path('', blogViews.index),
     path('admin/', admin.site.urls),
-    path('post/', blogViews.post),
+    path('post/<slug>', blogViews.post),
 ]
