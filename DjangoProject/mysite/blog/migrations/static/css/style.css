@@ -1,18 +1,39 @@
 body {
-  background-color: #F99 !important;
+  background-color: SlateGray !important;
 }
 
 h1 {
-  color:purple;
+  color:Ivory;
 }
 
 #post {
   background-color: white;
 }
 
-h3 {
-  color: black !important;
+#CardTitle {
+  color: navy;
 }
+
+#cardSummary {
+  color: 	#363630;
+}
+
+.card {
+  transition-duration: 0.4s;
+}
+
+.card:hover {
+  background-color: black;
+}
+
+.card:hover #CardTitle {
+  color: white;
+}
+
+.card:hover #cardSummary {
+  color: white;
+}
+
 div {
   color: black !important;
 }
