@@ -9,6 +9,7 @@ class Post(models.Model):
     content = models.TextField()
     published = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(upload_to='img')
 
     class Meta:
         ordering = ['-created']

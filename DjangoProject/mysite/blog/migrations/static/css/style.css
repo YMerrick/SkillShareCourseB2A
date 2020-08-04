@@ -11,19 +11,19 @@ h1 {
 }
 
 #CardTitle {
-  color: navy;
+  colsor: black;
 }
 
 #cardSummary {
-  color: 	#363630;
+  colsor: 	white;
 }
 
 .card {
-  transition-duration: 0.4s;
+  transition-duration: 0.2s;
 }
 
 .card:hover {
-  background-color: black;
+  background-color: DarkGray;
 }
 
 .card:hover #CardTitle {

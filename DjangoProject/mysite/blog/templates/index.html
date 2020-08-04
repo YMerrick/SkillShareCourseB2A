@@ -19,7 +19,7 @@
 {% block content %}
     <div class="container-fluid">
         <div class="row justify-content-md-center">
-            <div class="col-md-auto">
+            <div class="col-md-auto" style="background-image: url('')">
                 <h1> Welcome to MyBlog</h1>
             </div>
 
@@ -28,14 +28,23 @@
             {% for post in posts %}
               <div class="col-md-auto">
                 <a href="/post/{{ post.slug }}">
-                  <div class="card card-image" style="background-image:url({{post.image.url}});">
-                      <div class="card-body">
-                          <div class="card-text d-flex align-items-center justify-content-center py-5">
-                              <h3 id = "CardTitle">{{ post.title }} </h3>
+                  <div class="card bg-dark text-white" style="background-image:url({{post.image.url}});">
+                    <div class="card-body text-white align-items-center justify-content-center">
+                      <h5 class="card-title" id = "CardTitle">{{ post.title }} </h5>
+                      <p class="card-text" id = "cardSummary">{{ post.summary }}</p>
+                    </div>
+                    <img class='card-img' src="{{post.image.url}}" alt="" style="width: 50px; display: block;">
+                    <div class="card-img-overlay">
+
+
+
+                          <div class="card-text ">
+
                           </div>
-                      </div>
+
+                    </div>
                       <div class="container text-center">
-                        <p id = "cardSummary">{{ post.summary }}</p>
+
                       </div>
                   </div>
                 </a>
