@@ -13,3 +13,6 @@ def post(request, slug):
 
 def about(request):
     return render(None,'about.html',{})
+
+#def image(request):
+    #return render(requests,{})

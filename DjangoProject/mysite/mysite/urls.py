@@ -20,5 +20,6 @@ urlpatterns = [
     path('', blogViews.index),
     path('about', blogViews.about),
     path('admin/', admin.site.urls),
-    path('post/<slug>', blogViews.post),
+    path('post/<slug>', blogViews.post)
+    #path('media/<image>',blogViews.image)
 ]
