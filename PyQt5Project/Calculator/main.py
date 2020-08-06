@@ -8,26 +8,35 @@ class MainWindow(QWidget):
 
         self.initUi()
 
-    def initUi(self):
-        label = QLabel("Name: ")
-        nameInput = QLineEdit()
+    def alterName(self):
+        self.textLabel.setText(self.nameInput.text())
+        self.setWindowTitle(self.nameInput.text() + "'s Window")
 
-        button = QPushButton("Set Name")
+
+    def initUi(self):
+        self.textLabel = QLabel("There has been nothing entered so I don't know who I am")
+        self.label = QLabel("Name: ")
+        self.nameInput = QLineEdit()
+
+        self.button = QPushButton("Set Name")
+        self.button.clicked.connect(self.alterName)
 
         h = QHBoxLayout()
         h.addStretch()
-        h.addWidget(label)
-        h.addWidget(nameInput)
+        h.addWidget(self.label)
+        h.addWidget(self.nameInput)
 
         v = QVBoxLayout()
         v.addStretch()
+
+        v.addWidget(self.textLabel)
         v.addLayout(h)
-        v.addWidget(button)
+        v.addWidget(self.button)
 
         self.setLayout(v)
 
 
-        self.setWindowTitle("horizontal layout")
+        self.setWindowTitle("Nothing has been clicked")
         self.show()
 
 if __name__ == "__main__":
