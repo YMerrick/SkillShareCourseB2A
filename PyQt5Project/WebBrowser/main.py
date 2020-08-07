@@ -53,15 +53,20 @@ class App(QFrame):
         self.addressBar.returnPressed.connect(self.browseTo)
 
         #Build Toolbar buttons
-        self.backButton = QPushButton("<-")
-        self.forwardButton = QPushButton("->")
+        self.backButton = QPushButton("<")
+        self.forwardButton = QPushButton(">")
+        self.reloadButton = QPushButton("R")
 
-        self.backButton.connect(self.goBack)
-        self.forwardButton.connect(self.goForward)
+        self.backButton.clicked.connect(self.go_Back)
+        self.forwardButton.clicked.connect(self.go_Forward)
+        self.reloadButton.clicked.connect(self.reloadPage)
 
 
         #Build Toolbar
         self.toolBar.setLayout(self.toolBarLayout)
+        self.toolBarLayout.addWidget(self.backButton)
+        self.toolBarLayout.addWidget(self.forwardButton)
+        self.toolBarLayout.addWidget(self.reloadButton)
         self.toolBarLayout.addWidget(self.addressBar)
 
         #New tab button
@@ -86,6 +91,8 @@ class App(QFrame):
 
     def closeTab(self, i):
         self.tabBar.removeTab(i)
+        if self.tabBar.count() == 0:
+            sys.exit(-1)
 
     def addTab(self):
         i = self.tabCount
@@ -99,6 +106,7 @@ class App(QFrame):
 
         self.tabs[i].content.titleChanged.connect(lambda: self.tabContentChange(i,"title"))
         self.tabs[i].content.iconChanged.connect(lambda: self.tabContentChange(i,"icon"))
+        self.tabs[i].content.urlChanged.connect(lambda: self.tabContentChange(i,"url"))
 
         #Add webview to tabs layout
         self.tabs[i].layout.addWidget(self.tabs[i].content)
@@ -118,17 +126,23 @@ class App(QFrame):
         self.tabCount += 1
 
     def switchTab(self, i):
-        tab_Data = self.tabBar.tabData(i)["object"]
+        if self.tabBar.tabData(i):
+            tab_Content = self.getPageInfo(i)
 
-        tab_Content = self.findChild(QWidget, tab_Data)
-        self.container.layout.setCurrentWidget(tab_Content)
+            self.container.layout.setCurrentWidget(tab_Content)
+
+            self.changeUrl(tab_Content)
+
+    def changeUrl(self,tabContent):
+        newUrl = tabContent.content.url().toString()
+        self.addressBar.setText(newUrl)
+
 
     def browseTo(self):
         text = self.addressBar.text()
 
         i = self.tabBar.currentIndex()
-        tab = self.tabBar.tabData(i)["object"]
-        view = self.findChild(QWidget, tab).content
+        view = self.getPageInfo().content
 
         if "http" not in text:
             if "." not in text:
@@ -140,14 +154,17 @@ class App(QFrame):
 
         view.load(QUrl.fromUserInput(url))
 
-        self.tabs[i].content.titleChanged.connect(lambda: self.tabContentChange(i,"title"))
-        self.tabs[i].content.iconChanged.connect(lambda: self.tabContentChange(i,"icon"))
-
     def tabContentChange(self,i,type):
         tabObjectName = self.tabs[i].objectName()
 
         count = 0
         running = True
+
+        currentTabName = self.tabBar.tabData(self.tabBar.currentIndex())["object"]
+
+        if currentTabName == tabObjectName and type == "url":
+            self.changeUrl(self.getPageInfo(i))
+            return False
 
         while running:
             tabDataName = self.tabBar.tabData(count)
@@ -166,12 +183,25 @@ class App(QFrame):
             else:
                 count += 1
 
-    def goBack(self):
-        pass
+    def go_Back(self):
+        tabContent = self.getPageInfo().content
+        tabContent.back()
 
-    def goForward(self):
-        pass
+    def go_Forward(self):
+        tabContent = self.getPageInfo().content
+        tabContent.forward()
 
+    def reloadPage(self):
+        tabContent = self.getPageInfo().content
+        tabContent.reload()
+
+    def getPageInfo(self,i=-1):
+        if i == -1:
+            activeIndex = self.tabBar.currentIndex()
+        else:
+            activeIndex = i
+        tabName = self.tabBar.tabData(activeIndex)["object"]
+        return self.findChild(QWidget, tabName)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
