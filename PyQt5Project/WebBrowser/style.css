@@ -1,0 +1,37 @@
+QPushButton {
+  background: transparent;
+  border: none;
+  padding: 10px;
+}
+
+QPushButton:hover {
+  border: 2px solid #c7c7c7;
+  background-color: LightGray;
+}
+
+QTabBar {
+
+}
+
+QTabBar::tab {
+  background:transparent;
+  border: none;
+  padding: 10px;
+  color:#999;
+  border-right: 1px solid #ddd;
+}
+
+QTabBar::tab:first-child {
+  border-left: 1px solid #ddd;
+}
+
+QTabBar::tab::selected {
+  background:white;
+  color:#333;
+}
+
+#toolbar {
+  background-color:white;
+  border:none;
+  border-bottom: 0px solid #ddd;
+}

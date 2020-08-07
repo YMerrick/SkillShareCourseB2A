@@ -4,8 +4,8 @@ import json
 
 from PyQt5.QtWidgets import (QApplication, QWidget, QVBoxLayout, QHBoxLayout,
                              QPushButton, QLabel, QLineEdit, QTabBar,
-                             QFrame, QStackedLayout)
-from PyQt5.QtGui import QIcon, QWindow, QImage
+                             QFrame, QStackedLayout, QShortcut, QKeySequenceEdit)
+from PyQt5.QtGui import QIcon, QWindow, QImage, QKeySequence
 from PyQt5.QtCore import *
 from PyQt5.QtWebEngineWidgets import *
 
@@ -31,14 +31,18 @@ class App(QFrame):
     def createApp(self):
         self.layout = QVBoxLayout()
         self.layout.setContentsMargins(0,0,0,0)
+        self.layout.setSpacing(0)
 
         #Create Tabs
-        self.tabBar = QTabBar(movable=True,tabsClosable=True)
+        self.tabBar = QTabBar(movable=True,tabsClosable=True,expanding=False)
         self.tabBar.tabCloseRequested.connect(self.closeTab)
         self.tabBar.tabBarClicked.connect(self.switchTab)
 
         self.tabBar.setCurrentIndex(0)
         self.tabBar.setDrawBase(False)
+
+        self.shortcutNewTab = QShortcut(self,key=QKeySequence("Crtl+T"))
+        self.shortcutNewTab.activated.connect(self.addTab)
 
         #Keep track of tabs
         self.tabCount = 0
@@ -46,6 +50,7 @@ class App(QFrame):
 
         #Create Address bar
         self.toolBar = QWidget()
+        self.toolBar.setObjectName("toolbar")
         self.toolBarLayout = QHBoxLayout()
         self.addressBar = AddressBar()
         self.addTabButton = QPushButton("+")
@@ -100,6 +105,7 @@ class App(QFrame):
         self.tabs.append(QWidget())
         self.tabs[i].layout = QVBoxLayout()
         self.tabs[i].setObjectName("tab"+str(i))
+        self.tabs[i].layout.setContentsMargins(0,0,0,0)
 
         self.tabs[i].content = QWebEngineView()
         self.tabs[i].content.load(QUrl.fromUserInput("https://google.com"))
@@ -206,4 +212,7 @@ class App(QFrame):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = App()
+
+    with open("style.css", "r") as style:
+        app.setStyleSheet(style.read())
     sys.exit(app.exec_())
