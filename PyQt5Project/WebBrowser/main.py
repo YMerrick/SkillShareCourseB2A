@@ -1,6 +1,7 @@
 import sys
 import os
 import json
+import time
 
 from PyQt5.QtWidgets import (QApplication, QWidget, QVBoxLayout, QHBoxLayout,
                              QPushButton, QLabel, QLineEdit, QTabBar,
@@ -96,6 +97,9 @@ class App(QFrame):
 
     def closeTab(self, i):
         self.tabBar.removeTab(i)
+        del self.tabs[i]
+        print(self.tabs)
+        self.tabCount -= 1
         if self.tabBar.count() == 0:
             sys.exit(-1)
 
@@ -103,16 +107,13 @@ class App(QFrame):
         i = self.tabCount
 
         self.tabs.append(QWidget())
+        print(self.tabs)
         self.tabs[i].layout = QVBoxLayout()
         self.tabs[i].setObjectName("tab"+str(i))
         self.tabs[i].layout.setContentsMargins(0,0,0,0)
 
         self.tabs[i].content = QWebEngineView()
         self.tabs[i].content.load(QUrl.fromUserInput("https://google.com"))
-
-        self.tabs[i].content.titleChanged.connect(lambda: self.tabContentChange(i,"title"))
-        self.tabs[i].content.iconChanged.connect(lambda: self.tabContentChange(i,"icon"))
-        self.tabs[i].content.urlChanged.connect(lambda: self.tabContentChange(i,"url"))
 
         #Add webview to tabs layout
         self.tabs[i].layout.addWidget(self.tabs[i].content)
@@ -128,6 +129,10 @@ class App(QFrame):
         self.tabBar.addTab("New Tab")
         self.tabBar.setTabData(i,{"object":"tab"+str(i),"initial":i})
         self.tabBar.setCurrentIndex(i)
+
+        self.tabs[i].content.titleChanged.connect(lambda: self.tabContentChange(i,"title"))
+        self.tabs[i].content.iconChanged.connect(lambda: self.tabContentChange(i,"icon"))
+        self.tabs[i].content.urlChanged.connect(lambda: self.tabContentChange(i,"url"))
 
         self.tabCount += 1
 
@@ -162,6 +167,7 @@ class App(QFrame):
 
     def tabContentChange(self,i,type):
         tabObjectName = self.tabs[i].objectName()
+        print(tabObjectName)
 
         count = 0
         running = True
@@ -170,14 +176,14 @@ class App(QFrame):
 
         if currentTabName == tabObjectName and type == "url":
             self.changeUrl(self.getPageInfo(i))
-            return False
+            return None
 
         while running:
-            tabDataName = self.tabBar.tabData(count)
 
             if count >= 99:
                 running = False
 
+            tabDataName = self.tabBar.tabData(count)
             if tabObjectName == tabDataName["object"]:
                 if type == "title":
                     newTitle = self.findChild(QWidget,tabObjectName).content.title()
@@ -206,6 +212,7 @@ class App(QFrame):
             activeIndex = self.tabBar.currentIndex()
         else:
             activeIndex = i
+            print(i)
         tabName = self.tabBar.tabData(activeIndex)["object"]
         return self.findChild(QWidget, tabName)
 
