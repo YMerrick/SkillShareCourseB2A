@@ -1,10 +1,8 @@
-import vlc
+from playsound import playsound
+import pyglet
 
 
-def main():
-    file = vlc.MediaPlayer('audio/when.mp3')
-    file.play()
-
-
-if __name__ == '__main__':
-    main()
+file = 'audio/when.mp3'
+playsound(file)
+sound = pyglet.media.load('audio/system-fault.mp3',streaming = False)
+sound.play()
