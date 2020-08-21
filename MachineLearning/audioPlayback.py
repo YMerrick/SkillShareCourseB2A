@@ -4,13 +4,15 @@ import subprocess
 from commands import Commander
 
 
-r = sr.Recognizer()
-cmd = Commander()
+
+
 
 def say(text):
     subprocess.call('say '+text, shell=True)
 
 def initSpeech():
+    r = sr.Recognizer()
+    cmd = Commander()
     print("Listenning...")
     playsound('audio/when.mp3')
     with sr.Microphone() as source:

@@ -1,5 +1,6 @@
 import subprocess
-#import os
+import os
+from getAnswer import Fetcher
 
 
 class Commander:
@@ -16,8 +17,14 @@ class Commander:
             elif "your" in text:
                 self.respond("My name is Hitler Adolf. How are you?")
                 print("your name?")
+        elif "launch" in text or "open" in text:
+            app = text.split(" ",1)[-1]
+            os.system(app.lower())
+            self.respond("Opening "+app)
         else:
-            self.respond(text)
+            f = Fetcher("https://www.google.com/search?#q=" + text)
+            answer = f.lookup()
+            self.respond(answer)
 
     def respond(self, response):
-        subprocess.call("say %s"%response, shell = True)
+        subprocess.call('say "%s"'%response, shell = True)
