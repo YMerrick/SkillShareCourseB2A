@@ -1,0 +1,39 @@
+body {
+  background-color: SlateGray !important;
+}
+
+h1 {
+  color:Ivory;
+}
+
+#post {
+  background-color: white;
+}
+
+#CardTitle {
+  colsor: black;
+}
+
+#cardSummary {
+  colsor: 	white;
+}
+
+.card {
+  transition-duration: 0.2s;
+}
+
+.card:hover {
+  background-color: DarkGray;
+}
+
+.card:hover #CardTitle {
+  color: white;
+}
+
+.card:hover #cardSummary {
+  color: white;
+}
+
+div {
+  color: black !important;
+}
